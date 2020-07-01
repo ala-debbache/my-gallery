@@ -1,0 +1,75 @@
+html{
+    scroll-behavior: smooth;
+}
+#go_top{
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    background: #4cc2c0;
+    bottom: 40px;
+    right: 40px;
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+    font-size: 24px;
+    display: none;
+    z-index: 1;
+}
+.stunning-header-bg-lightviolet {
+    background-image: url(../img/pattern-bg-lightviolet.jpg);
+}
+.forminp{
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+#avatar{
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+#posted_by{
+    height: 60px;
+    width: 60px;
+}
+.post_img{
+    height: 300px;
+    object-fit: cover;
+}
+.share-btn{
+    text-align: center;
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    background: #262626;
+    color: #fff;
+    margin: 0 20px;
+    border-radius: 50%;
+    font-size: 30px;
+}
+.f{
+    background: #4267B2;
+    transition: ease 0.5s;
+}
+.f:hover{
+    background: #3b5998;
+}
+.i{
+    background: #e95950;
+    transition: ease 0.5s;
+}
+.i:hover{
+    background: #bc2a8d;
+}
+.t{
+    background: #00acee;
+    transition: ease 0.5s;
+}
+.t:hover{
+    background: #008abe;
+}

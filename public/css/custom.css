@@ -73,3 +73,7 @@ html{
 .t:hover{
     background: #008abe;
 }
+.alert{
+    color: #3c763d;
+    background-color: #dff1d7;
+}

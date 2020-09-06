@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/edit/{post}', 'FrontController@editPost')->name('edit-post');
     Route::post('/create', 'FrontController@store_post')->name('store-post');
     Route::put('/edit/{post}', 'FrontController@update_post')->name('update-post');
+    Route::delete('/delete/{post}', 'FrontController@delete')->name('delete-post');
 });
 
 Route::middleware(['VerifyIsAdmin'])->group(function () {
@@ -38,9 +39,13 @@ Route::middleware(['VerifyIsAdmin'])->group(function () {
     Route::resource('categories','CategoriesController');
     Route::resource('tags','TagsController');
     Route::get('trashed-posts','PostsController@trashed')->name('trashed.index');
+    Route::get('confirmed-posts','PostsController@confirmed')->name('confirmed.index');
     Route::put('restore-posts/{post}','PostsController@restore')->name('trashed.restore');
+    Route::put('confirmed-posts/{post}','PostsController@confirm')->name('confirmed.confirm');
     Route::get('users','UsersController@index')->name('users.index');
     Route::put('users/{user}','UsersController@makeAdmin')->name('make-admin');
+    Route::put('users-unmake/{user}','UsersController@unmakeAdmin')->name('unmake-admin');
     Route::get('user/edit','UsersController@edit')->name('user.edit');
     Route::put('user/edit','UsersController@update')->name('user.update');
+    Route::delete('user/delete/{user}','UsersController@delete')->name('user.delete');
 });

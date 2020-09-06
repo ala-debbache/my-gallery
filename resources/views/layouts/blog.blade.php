@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>@yield('title')</title>
-    
+
     <link rel="stylesheet" type="text/css" href="{{asset('css/fonts.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/crumina-fonts.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/normalize.css')}}">
@@ -21,8 +21,9 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/primary-menu.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/magnific-popup.css')}}">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    
-    
+
+
+
 
     <!--Styles for RTL-->
 
@@ -44,15 +45,15 @@
 
 
 <body class=" ">
-    
+
 <div class="content-wrapper">
-    
+
     <header class="header" id="site-header">
         <div class="container">
                 <div class="header-content-wrapper">
                     <div class="logo">
                         <div class="logo-text">
-                            <div class="logo-title"><a href="{{route('welcome')}}">LARAVEL'S BLOG</a></div>
+                            <div class="logo-title"><a href="{{route('welcome')}}">MY GALLERY</a></div>
                         </div>
                     </div>
 
@@ -101,9 +102,9 @@
                                 </li>
                             @endauth
                         </ul>
-                        
+
                     </nav>
-                    
+
                     <ul class="nav-add">
                         <li class="search search_main" style="color: black; margin-top: 5px;">
                             <a href="#" class="js-open-search">
@@ -114,10 +115,10 @@
                 </div>
         </div>
     </header>
-    
-    
+
+
     @yield('content')
-    
+
 
     <!-- Footer -->
 
@@ -127,7 +128,7 @@
             <div class="info">
                 <div class="col-lg-6 col-lg-offset-3">
                     <div class="heading text-center">
-                        <h3 class="heading-title" >Seosight Company!</h3>
+                        <h3 class="heading-title" >MY GALLERY</h3>
                         <div class="heading-line">
                             <span class="short-line"></span>
                             <span class="long-line"></span>

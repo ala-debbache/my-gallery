@@ -18,7 +18,7 @@ class FrontController extends Controller
     public function index()
     {
         return view('welcome')->with('user',auth()->user())
-                                ->with('posts',Post::orderBy('created_at','desc')->paginate(12))
+                                ->with('posts',Post::where('confirmed','=',1)->orderBy('created_at','desc')->paginate(12))
                                 ->with('categories',Category::all())
                                 ->with('tags',Tag::all());
     }
@@ -35,7 +35,7 @@ class FrontController extends Controller
     {
         return view('blog.category')->with('category',$category)
                                     ->with('categories',Category::all())
-                                    ->with('posts',Post::where('category_id',$category->id)->paginate(12));
+                                    ->with('posts',Post::where('confirmed','=',1)->where('category_id',$category->id)->paginate(12));
     }
 
     // show the posts that belongs to a tag
@@ -43,7 +43,7 @@ class FrontController extends Controller
     {
         return view('blog.tag')->with('tag',$tag)
                                     ->with('categories',Category::all())
-                                    ->with('posts',$tag->posts()->paginate(12));
+                                    ->with('posts',$tag->posts()->where('confirmed','=',1)->paginate(12));
     }
 
     // show the profile of the user with his posts
@@ -51,7 +51,7 @@ class FrontController extends Controller
     {
         return view('blog.profile')->with('categories',Category::all())
                                     ->with('user',$user)
-                                    ->with('posts',Post::orderBy('created_at','desc')->where('user_id',$user->id)->paginate(12));
+                                    ->with('posts',Post::where('confirmed','=',1)->orderBy('created_at','desc')->where('user_id',$user->id)->paginate(12));
     }
 
     // here the user can edit his profile
@@ -66,15 +66,24 @@ class FrontController extends Controller
     {
         if($request->hasFile('avatar')){
             if($user->avatar){
-                $avatar=$request->avatar->store('users');
-                Storage::delete($user->avatar);
+                // $avatar=$request->avatar->store('users');
+                // Storage::delete($user->avatar);
+                unlink($user->avatar);
+                $image=$request->avatar;
+                $name=time().$image->getClientOriginalName().'.'.$image->getClientOriginalExtension();
+                $destination=public_path('/users-avatars');
+                $image->move($destination,$name);
                 $user->update([
-                    'avatar'=>$avatar
+                    'avatar'=>'users-avatars/'.$name
                 ]);
             }else{
-                $avatar=$request->avatar->store('users');
+                // $avatar=$request->avatar->store('users');
+                $image=$request->avatar;
+                $name=time().$image->getClientOriginalName().'.'.$image->getClientOriginalExtension();
+                $destination=public_path('/users-avatars');
+                $image->move($destination,$name);
                 $user->update([
-                    'avatar'=>$avatar
+                    'avatar'=>'users-avatars/'.$name
                 ]);
             }
         }
@@ -94,6 +103,7 @@ class FrontController extends Controller
             $user->about=$request->about;
         }
         $user->save();
+        session()->flash('success','profile updated successfuly');
         return redirect()->route('profile',$user->id);
     }
 
@@ -107,10 +117,14 @@ class FrontController extends Controller
     // store the posts
     public function store_post(CreatePostRequest $request)
     {
-        $image=$request->image->store('posts');
+        // $image=$request->image->store('posts');
+        $image=$request->file('image');
+        $name=time().$image->getClientOriginalName().'.'.$image->getClientOriginalExtension();
+        $destination=public_path('/posts-images');
+        $image->move($destination,$name);
         $post=Post::create([
             'title'=>$request->title,
-            'image'=>$image,
+            'image'=>'posts-images/'.$name,
             'category_id'=>$request->category_id,
             'user_id'=>auth()->user()->id
         ]);
@@ -121,7 +135,8 @@ class FrontController extends Controller
         if($request->tags){
             $post->tags()->attach($request->tags);
         }
-        return redirect()->route('profile',auth()->user()->id);
+        session()->flash('success','post created successfuly please wait until the admin approve it');
+        return redirect()->route('profile',auth()->user());
     }
 
     // page where the users can edit posts
@@ -136,11 +151,16 @@ class FrontController extends Controller
     public function update_post(UpdatePostRequest $request,Post $post)
     {
         if($request->hasFile('image')){
-            $image=$request->image->store('posts');
-            Storage::delete($post->image);
+            // $image=$request->image->store('posts');
+            // Storage::delete($post->image);
+            unlink($post->image);
+            $image=$request->file('image');
+            $name=time().$image->getClientOriginalName().'.'.$image->getClientOriginalExtension();
+            $destination=public_path('/posts-images');
+            $image->move($destination,$name);
             $post->update([
                 'title'=>$request->title,
-                'image'=>$image,
+                'image'=>'posts-images/'.$name,
                 'content'=>$request->content,
                 'category_id'=>$request->category_id,
             ]);
@@ -153,7 +173,20 @@ class FrontController extends Controller
         if($request->tags){
             $post->tags()->sync($request->tags);
         }
+        session()->flash('success','post updated successfuly');
         return redirect()->route('single-post',$post->id);
+    }
+
+
+    // delete posts
+    public function delete($id)
+    {
+        $post=Post::withTrashed()->where('id',$id)->first();
+        // Storage::delete($post->image);
+        unlink($post->image);
+        $post->forceDelete();
+        session()->flash('success','post deleted successfuly');
+        return redirect()->route('profile',auth()->user());
     }
 
     // search for posts

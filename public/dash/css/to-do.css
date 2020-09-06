@@ -15,7 +15,7 @@
 	clear: both;
 }
 
-.tasks-widget .task-footer  { 
+.tasks-widget .task-footer  {
 	margin-top: 5px;
 }
 
@@ -102,9 +102,24 @@
 		float:inherit;
 		display:block;
 	}
-	
+
 	.tasks-widget .task-list-projects li > .label {
 		margin-bottom:5px;
 	}
 
+}
+
+.alert{
+    padding: 10px;
+    font-size:18px;
+}
+
+.success{
+    color: #fff;
+    background: #55efc4;
+}
+
+.danger{
+    color: #fff;
+    background: #ff7675;
 }

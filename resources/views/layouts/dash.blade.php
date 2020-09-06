@@ -43,7 +43,7 @@
         <div class="fa fa-bars tooltips" data-placement="right"></div>
       </div>
       <!--logo start-->
-      <a href="{{route('welcome')}}" class="logo"><b>GALL<span>ERY</span></b></a>
+      <a href="{{route('welcome')}}" class="logo"><b>MY<span> GALLERY</span></b></a>
       <!--logo end-->
       <div class="top-menu">
         <ul class="nav pull-right top-menu">
@@ -68,12 +68,18 @@
         <ul class="sidebar-menu" id="nav-accordion">
           <p class="centered">
             @if(auth()->user()->avatar=='')
-              <img src="/storage/avatar/avatar.webp" class="img-circle" width="80">
+              <img src="{{asset('img/avatar.webp')}}" class="img-circle" width="80">
             @else
-              <img src="/storage/{{auth()->user()->avatar}}" class="img-circle" width="80">
+              <img src="{{asset(auth()->user()->avatar)}}" class="img-circle" width="80">
             @endif
           </p>
           <h5 class="centered">{{auth()->user()->name}}</h5>
+          <li class="mt">
+            <a href="{{route('welcome')}}">
+              <i class="fa fa-share"></i>
+              <span>My gallery</span>
+              </a>
+          </li>
           <li class="mt">
             <a href="{{route('home')}}">
               <i class="fa fa-home"></i>
@@ -87,7 +93,6 @@
               </a>
             <ul class="sub">
               <li><a href="{{route('users.index')}}">Show users</a></li>
-              <li><a href="{{route('users.index')}}">Add admins</a></li>
             </ul>
           </li>
           <li class="sub-menu">
@@ -117,6 +122,7 @@
               </a>
             <ul class="sub">
               <li><a href="{{route('posts.index')}}">Shared posts</a></li>
+              <li><a href="{{route('confirmed.index')}}">Unconfirmed posts</a></li>
               <li><a href="{{route('trashed.index')}}">Trashed posts</a></li>
               <li><a href="{{route('posts.create')}}">Add posts</a></li>
             </ul>
@@ -137,10 +143,10 @@
             @yield('content')
       </section>
     </section>
-    
-        
-        
-        
+
+
+
+
         <!-- js placed at the end of the document so the pages load faster -->
   <script src="{{asset('dash/lib/jquery/jquery.min.js')}}"></script>
 

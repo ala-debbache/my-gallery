@@ -25,7 +25,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return view('admin.posts.index')->with('posts',Post::orderBy('created_at','desc')->get());
+        return view('admin.posts.index')->with('posts',Post::where('confirmed','=',1)->orderBy('created_at','desc')->get());
     }
 
     /**
@@ -47,10 +47,14 @@ class PostsController extends Controller
      */
     public function store(CreatePostRequest $request)
     {
-        $image=$request->image->store('posts');
+        $image=$request->image;
+        $name=time().$image->getClientOriginalName().'.'.$image->getClientOriginalExtension();
+        $destination=public_path('/posts-images');
+        $image->move($destination,$name);
+        // $image=$request->image->store('posts');
         $post=Post::create([
             'title'=>$request->title,
-            'image'=>$image,
+            'image'=>'posts-images/'.$name,
             'content'=>$request->content,
             'category_id'=>$request->category_id,
             'user_id'=>auth()->user()->id
@@ -58,7 +62,7 @@ class PostsController extends Controller
         if($request->tags){
             $post->tags()->attach($request->tags);
         }
-        session()->flash('success','post created successfuly');
+        session()->flash('success','post created successfuly please go and confirm it');
         return redirect()->route('posts.index');
     }
 
@@ -96,11 +100,16 @@ class PostsController extends Controller
     public function update(Request $request,Post $post)
     {
         if($request->hasFile('image')){
-            $image=$request->image->store('posts');
-            Storage::delete($post->image);
+            // $image=$request->image->store('posts');
+            // Storage::delete($post->image);
+            unlink($post->image);
+            $image=$request->file('image');
+            $name=time().$image->getClientOriginalName().'.'.$image->getClientOriginalExtension();
+            $destination=public_path('/posts-images');
+            $image->move($destination,$name);
             $post->update([
                 'title'=>$request->title,
-                'image'=>$image,
+                'image'=>'posts-images/'.$name,
                 'content'=>$request->content,
                 'category_id'=>$request->category_id,
             ]);
@@ -127,18 +136,20 @@ class PostsController extends Controller
     {
         $post=Post::withTrashed()->where('id',$id)->first();
         if($post->trashed()){
-            Storage::delete($post->image);
+            // Storage::delete($post->image);
+            unlink($post->image);
             $post->forceDelete();
         }else{
             $post->delete();
         }
         session()->flash('success','post deleted successfuly');
-        return redirect()->route('posts.index');
+        return back();
     }
     public function trashed()
     {
         $trashed=Post::onlyTrashed()->get();
-        return view('admin.posts.index')->with('posts',$trashed);
+        return view('admin.posts.index')->with('posts',$trashed)
+                                        ->with('trashed',1);
     }
     public function restore($id)
     {
@@ -146,6 +157,22 @@ class PostsController extends Controller
         $post->restore();
         session()->flash('success','post restored successfuly');
         $trashed=Post::onlyTrashed()->get();
-        return view('admin.posts.index')->with('posts',$trashed);
+        return back();
+    }
+
+    public function confirmed()
+    {
+        $trashed=Post::where('confirmed','=',0)->get();
+        return view('admin.posts.index')->with('posts',$trashed)
+                                        ->with('confirmed',1);
+    }
+
+    public function confirm(Post $post)
+    {
+        $post->confirmed=1;
+        $post->save();
+        session()->flash('success','post confirmed successfuly');
+        $trashed=Post::onlyTrashed()->get();
+        return back();
     }
 }

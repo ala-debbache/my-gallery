@@ -1,13 +1,19 @@
 @extends('layouts.dash')
 
 @section('styles')
-    
+
   <link rel="stylesheet" href="{{asset('dash/css/to-do.css')}}">
 @endsection
 
 @section('content')
 <div class="row mt">
     <div class="col-md-12">
+        @if (session('success'))
+            <p class="alert success">{{session('success')}}</p>
+        @endif
+        @if (session('danger'))
+            <p class="alert danger">{{session('danger')}}</p>
+        @endif
         <section class="task-panel tasks-widget">
             <div class="panel-heading">
             <div class="pull-left">
@@ -26,7 +32,7 @@
                                     <div class="task-title">
                                     <span class="task-title-sp">{{$category->name}}</span>
                                     <span class="badge bg-theme">{{$category->posts()->count()}}</span>
-                                    <div class="pull-right hidden-phone" style="display:flex;">
+                                    <div class="pull-right" style="display:flex;">
                                         <a href="{{route('categories.edit',$category->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
                                         <form action="{{route('categories.destroy',$category->id)}}" method="POST">
                                             @csrf
@@ -36,7 +42,7 @@
                                     </div>
                                     </div>
                                 </li>
-                            @endforeach    
+                            @endforeach
                         @endif
                     </ul>
                 </div>

@@ -27,9 +27,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.home')->with('users',User::all())
-                            ->with('posts',Post::all())
-                            ->with('categories',Category::all())
-                            ->with('tags',Tag::all());
+        return view('admin.home')->with('users',User::all()->count())
+                            ->with('unconfirmed',Post::where('confirmed','=',0)->get()->count())
+                            ->with('shared',Post::where('confirmed','=',1)->get()->count())
+                            ->with('trashed',Post::onlyTrashed()->get()->count())
+                            ->with('categories',Category::all()->count())
+                            ->with('tags',Tag::all()->count());
     }
 }

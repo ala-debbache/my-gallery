@@ -1,6 +1,6 @@
 @extends('layouts.blog')
 @section('title')
-    Edit profile 
+    Edit profile
 @endsection
 
 @section('styles')
@@ -11,24 +11,24 @@
 @section('content')
 <div class="content-wrapper">
     <button id="go_top"><i class="fa fa-arrow-up"></i></button>
-    
+
     <!-- Stunning Header -->
-    
+
     <div class="stunning-header stunning-header-bg-lightviolet">
         <div class="stunning-header-content">
             <h1 class="stunning-header-title">EDIT PROFILE</h1>
         </div>
     </div>
-    
+
     <!-- End Stunning Header -->
-    
+
     <!--  Details -->
-    
-    
+
+
     <div class="container">
         <div class="row medium-padding120">
             <main class="main">
-                
+
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-12 col-md-12">
@@ -36,7 +36,7 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">
-                                    <label for="avatar"><h4>Avatar</h4></label><br> 
+                                    <label for="avatar"><h4>Avatar</h4></label><br>
                                     <img src="/img/placeholder.jpg" id="avatar-dis" width="200px" height="200px"><br><br>
                                     <button type="button" id="btn-avatar" class="btn btn-success">Upload Image</button>
                                     <input type="file" id="avatar" hidden="true" name="avatar" class="form-control">
@@ -59,20 +59,22 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="about"><h4>About</h4></label>
-                                    <textarea type="text" id="about" name="about" class="form-control">{{$user->about}}</textarea>
+                                    <textarea type="text" id="about" name="about" class="form-control"></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-success">Update</button>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- End  Details -->
                 <br>
                 <br>
                 <br>
                 <!-- Sidebar-->
-    
+
                 <div class="col-lg-12" id="categories_section">
                     <aside aria-label="sidebar" class="sidebar sidebar-right">
                         <div  class="widget w-tags">
@@ -83,7 +85,7 @@
                                     <span class="long-line"></span>
                                 </div>
                             </div>
-    
+
                             <div class="tags-wrap">
                                 @foreach ($categories as $category)
                                     <a href="{{route('category',$category->id)}}" class="w-tags-item">{{$category->name}}</a>
@@ -92,13 +94,13 @@
                         </div>
                     </aside>
                 </div>
-    
+
                 <!-- End Sidebar-->
-    
+
             </main>
         </div>
     </div>
-    
+
 </div>
 @endsection
 @section('scripts')

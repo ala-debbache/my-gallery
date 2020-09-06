@@ -19,24 +19,24 @@
 @section('content')
 <div class="content-wrapper">
     <button id="go_top"><i class="fa fa-arrow-up"></i></button>
-    
+
     <!-- Stunning Header -->
-    
+
     <div class="stunning-header stunning-header-bg-lightviolet">
         <div class="stunning-header-content">
             <h1 class="stunning-header-title">{{isset($post)?'EDIT POST':'CREATE POST'}}</h1>
         </div>
     </div>
-    
+
     <!-- End Stunning Header -->
-    
+
     <!-- Post Details -->
-    
-    
+
+
     <div class="container">
         <div class="row medium-padding120">
             <main class="main">
-                
+
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-12 col-md-12">
@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="image"><h4>Image</h4></label><br>
-                                    <img src="{{isset($post)?'/storage/'.$post->image:'/img/placeholder.jpg'}}" id="image-dis" width="200px" height="200px"><br><br>
+                                    <img src="{{isset($post)?asset($post->image):'/img/placeholder.jpg'}}" id="image-dis" width="200px" height="200px"><br><br>
                                     <button type="button" id="btn-image" class="btn btn-success">Upload Image</button>
                                     <input type="file" id="image" hidden="true" name="image" class="form-control">
                                 </div>
@@ -64,7 +64,7 @@
                                     <label for="category"><h4>Category</h4></label>
                                     <select id="category" name="category_id" class="form-control">
                                         @foreach ($categories as $category)
-                                            <option value="{{$category->id}}" 
+                                            <option value="{{$category->id}}"
                                                 @if(isset($post) && $category->id == $post->category_id)
                                                     selected
                                                 @endif>{{$category->name}}</option>
@@ -84,7 +84,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                
+
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary">{{isset($post)?'EDIT':'CREATE'}}</button>
                                 </div>
@@ -98,7 +98,7 @@
                 <br>
                 <br>
                 <!-- Sidebar-->
-    
+
                 <div class="col-lg-12" id="categories_section">
                     <aside aria-label="sidebar" class="sidebar sidebar-right">
                         <div  class="widget w-tags">
@@ -109,7 +109,7 @@
                                     <span class="long-line"></span>
                                 </div>
                             </div>
-    
+
                             <div class="tags-wrap">
                                 @foreach ($categories as $category)
                                     <a href="{{route('category',$category->id)}}" class="w-tags-item">{{$category->name}}</a>
@@ -118,13 +118,13 @@
                         </div>
                     </aside>
                 </div>
-    
+
                 <!-- End Sidebar-->
-    
+
             </main>
         </div>
     </div>
-    
+
 </div>
 @endsection
 @section('scripts')

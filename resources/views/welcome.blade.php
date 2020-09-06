@@ -137,8 +137,6 @@ MY GALLERY
 
         </div>
         <div class="padded-50"></div>
-        {{$posts->links()}}
-        <div class="padded-50"></div>
     </div>
 
 

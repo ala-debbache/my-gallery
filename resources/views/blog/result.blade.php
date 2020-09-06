@@ -31,9 +31,9 @@
 
 
                     <div class="col-lg-6">
-                        @for ($i=0;$i<12;$i++)
+                        @for ($i=0;$i<$posts->count();$i++)
                         @if(!$posts[$i])
-                            <?php $i=12; ?>
+                            <?php $i=$posts->count(); ?>
 
                         @else
                             @if ($i%2==0)
@@ -85,9 +85,9 @@
                     @endfor
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xl-6">
-                        @for ($i=0;$i<12;$i++)
+                        @for ($i=0;$i<$posts->count();$i++)
                         @if(!$posts[$i])
-                            <?php $i=12; ?>
+                            <?php $i=$posts->count(); ?>
                         @else
                             @if ($i%2!=0)
                                 <article class="hentry post post-standard has-post-thumbnail sticky">

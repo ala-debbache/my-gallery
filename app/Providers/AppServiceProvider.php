@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if ('APP_ENV' === 'production') {
+        if ('APP_ENV' !== 'local') {
             URL::forceScheme('https');
         }
         ini_set("memory_limit", "100M");

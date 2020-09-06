@@ -18,7 +18,7 @@ class FrontController extends Controller
     public function index()
     {
         return view('welcome')->with('user',auth()->user())
-                                ->with('posts',Post::where('confirmed','=',1)->orderBy('created_at','desc')->paginate(12))
+                                ->with('posts',Post::where('confirmed','=',1)->orderBy('created_at','desc')->get())
                                 ->with('categories',Category::all())
                                 ->with('tags',Tag::all());
     }
@@ -35,7 +35,7 @@ class FrontController extends Controller
     {
         return view('blog.category')->with('category',$category)
                                     ->with('categories',Category::all())
-                                    ->with('posts',Post::where('confirmed','=',1)->where('category_id',$category->id)->paginate(12));
+                                    ->with('posts',Post::where('confirmed','=',1)->where('category_id',$category->id)->get());
     }
 
     // show the posts that belongs to a tag
@@ -43,7 +43,7 @@ class FrontController extends Controller
     {
         return view('blog.tag')->with('tag',$tag)
                                     ->with('categories',Category::all())
-                                    ->with('posts',$tag->posts()->where('confirmed','=',1)->paginate(12));
+                                    ->with('posts',$tag->posts()->where('confirmed','=',1)->get());
     }
 
     // show the profile of the user with his posts
@@ -51,7 +51,7 @@ class FrontController extends Controller
     {
         return view('blog.profile')->with('categories',Category::all())
                                     ->with('user',$user)
-                                    ->with('posts',Post::where('confirmed','=',1)->orderBy('created_at','desc')->where('user_id',$user->id)->paginate(12));
+                                    ->with('posts',Post::where('confirmed','=',1)->orderBy('created_at','desc')->where('user_id',$user->id)->get());
     }
 
     // here the user can edit his profile

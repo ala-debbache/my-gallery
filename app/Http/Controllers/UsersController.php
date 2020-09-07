@@ -47,7 +47,9 @@ class UsersController extends Controller
         if($request->hasFile('avatar')){
             // $avatar=$request->avatar->store('users');
             // Storage::delete($request->avatar);
-            // unlink($user->avatar);
+            if ($user->avatar) {
+                unlink($user->avatar);
+            }
             $image=$request->avatar;
             $name=time().$image->getClientOriginalName().'.'.$image->getClientOriginalExtension();
             $destination=public_path('/users-avatars');
@@ -77,6 +79,9 @@ class UsersController extends Controller
     {
         $count=User::all()->count();
         $user=User::where('id','=',$id)->first();
+        if ($user->avatar) {
+            unlink($user->avatar);
+        }
         if (!$user->isadmin()) {
             foreach ($user->posts as $post) {
                 $post->delete();

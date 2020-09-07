@@ -47,7 +47,7 @@ class UsersController extends Controller
         if($request->hasFile('avatar')){
             // $avatar=$request->avatar->store('users');
             // Storage::delete($request->avatar);
-            unlink($user->avatar);
+            // unlink($user->avatar);
             $image=$request->avatar;
             $name=time().$image->getClientOriginalName().'.'.$image->getClientOriginalExtension();
             $destination=public_path('/users-avatars');

@@ -68,7 +68,7 @@ class FrontController extends Controller
             if($user->avatar){
                 // $avatar=$request->avatar->store('users');
                 // Storage::delete($user->avatar);
-                unlink($user->avatar);
+                // unlink($user->avatar);
                 $image=$request->avatar;
                 $name=time().$image->getClientOriginalName().'.'.$image->getClientOriginalExtension();
                 $destination=public_path('/users-avatars');

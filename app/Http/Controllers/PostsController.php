@@ -55,11 +55,15 @@ class PostsController extends Controller
         $post=Post::create([
             'title'=>$request->title,
             'image'=>'posts-images/'.$name,
-            'content'=>$request->content,
+            // 'content'=>$request->content,
             'category_id'=>$request->category_id,
             'confirmed'=>1,
             'user_id'=>auth()->user()->id
         ]);
+        if($request->content){
+            $post->content=$request->content;
+            $post->save();
+        }
         if($request->tags){
             $post->tags()->attach($request->tags);
         }

@@ -57,6 +57,7 @@ class PostsController extends Controller
             'image'=>'posts-images/'.$name,
             'content'=>$request->content,
             'category_id'=>$request->category_id,
+            'confirmed'=>1,
             'user_id'=>auth()->user()->id
         ]);
         if($request->tags){

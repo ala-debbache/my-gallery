@@ -43,7 +43,7 @@
                                             @if($post->user_id===auth()->user()->id)
                                             <a href="{{route('posts.edit',$post->id)}}" class="btn btn-primary btn-xs" style="margin-left:5px;"><i class="fa fa-pencil"></i></a>
                                             @endif
-                                            @if ($post->confirmed===0)
+                                            @if (isset($confirmed))
                                                 <a href="{{route('single-post',$post->id)}}" class="btn btn-warning btn-xs" style="margin-left:5px;" target="_blank"><i class="fa fa-eye"></i></a>
                                                 <form action="{{route('confirmed.confirm',$post->id)}}" method="post">
                                                     @csrf

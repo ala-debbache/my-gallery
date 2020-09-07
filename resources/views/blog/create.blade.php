@@ -38,7 +38,7 @@
             <main class="main">
                 @if ($errors->any())
                     @foreach ($errors->all() as $error)
-                        <p class=" danger">{{$error}}</p>
+                        <p class="alert danger">{{$error}}</p>
                     @endforeach
                 @endif
                 <div class="container">

@@ -7,6 +7,11 @@
         <div class="col-lg-12">
           <div class="form-panel">
             <h4 class="mb"><i class="fa fa-angle-right"></i>  {{isset($tag)?'Update tag':'Create tag'}}</h4>
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <p class="alert danger">{{$error}}</p>
+                @endforeach
+            @endif
             <form class="form-horizontal style-form"action="{{isset($tag)? route('tags.update',$tag->id):route('tags.store')}}" method="POST">
                 @csrf
                 @if(isset($tag))
@@ -26,6 +31,6 @@
         </div>
         <!-- col-lg-12-->
     </div>
-    
+
 </div>
 @endsection

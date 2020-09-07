@@ -3484,3 +3484,18 @@ ul.chat-available-user li a:hover {
 #copyrights a {
   color: #fff;
 }
+
+.alert{
+    padding: 10px;
+    font-size:18px;
+}
+
+.success{
+    color: #fff;
+    background: #55efc4;
+}
+
+.danger{
+    color: #fff;
+    background: #ff7675;
+}

@@ -6,11 +6,16 @@
 
 @section('content')
 <div class="container">
-    <h3><i class="fa fa-angle-right"></i>  Add Posts</h3>
+    <h3><i class="fa fa-angle-right"></i>  {{isset($tag)?'Edit post':'Add post'}}</h3>
     <div class="row mt">
         <div class="col-lg-12">
           <div class="form-panel">
-            <h4 class="mb"><i class="fa fa-angle-right"></i> Create Post</h4>
+            <h4 class="mb"><i class="fa fa-angle-right"></i> {{isset($tag)?'Update post':'Create post'}}</h4>
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <p class="alert danger">{{$error}}</p>
+                @endforeach
+            @endif
             <form class="form-horizontal style-form" action="{{isset($post)? route('posts.update',$post->id):route('posts.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @if(isset($post))
@@ -40,7 +45,7 @@
                     <div class="col-sm-8">
                     <select id="category" name="category_id" class="form-control">
                         @foreach ($categories as $category)
-                            <option value="{{$category->id}}" 
+                            <option value="{{$category->id}}"
                                 @if(isset($post) && $category->id == $post->category_id)
                                     selected
                                 @endif>{{$category->name}}</option>
@@ -71,7 +76,7 @@
         </div>
         <!-- col-lg-12-->
     </div>
-    
+
 </div>
 @endsection
 

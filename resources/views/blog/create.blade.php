@@ -1,6 +1,6 @@
 @extends('layouts.blog')
 @section('title')
-    Create Post
+{{isset($post)?'Edit post':'Create post'}}
 @endsection
 
 @section('styles')
@@ -36,7 +36,11 @@
     <div class="container">
         <div class="row medium-padding120">
             <main class="main">
-
+                @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <p class="alert danger">{{$error}}</p>
+                    @endforeach
+                @endif
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-12 col-md-12">

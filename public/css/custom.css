@@ -74,6 +74,18 @@ html{
     background: #008abe;
 }
 .alert{
-    color: #3c763d;
-    background-color: #dff1d7;
+    padding: 10px;
+    font-size:18px;
 }
+
+.success{
+    color: #fff;
+    background: #55efc4;
+}
+
+.danger{
+    color: #fff;
+    background: #ff7675;
+}
+
+

@@ -49,7 +49,6 @@ class FrontController extends Controller
     // show the profile of the user with his posts
     public function profile(User $user)
     {
-        dd($user->avatar);
         return view('blog.profile')->with('categories',Category::all())
                                     ->with('user',$user)
                                     ->with('posts',Post::where('confirmed','=',1)->orderBy('created_at','desc')->where('user_id',$user->id)->get());

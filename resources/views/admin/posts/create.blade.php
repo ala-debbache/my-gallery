@@ -2,6 +2,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.css">
+    <link href="{{ asset('css/errors.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')

@@ -1,5 +1,9 @@
 @extends('layouts.dash')
 
+@section('styles')
+    <link href="{{ asset('css/errors.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 <div class="container">
     <h3><i class="fa fa-angle-right"></i>{{isset($category)? 'Add categories':'Edit categories'}}</h3>

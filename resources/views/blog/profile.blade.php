@@ -6,6 +6,7 @@
 @section('styles')
     <link rel="stylesheet" href="{{asset('css/custom.css')}}">
     <link rel="stylesheet" href="{{asset('css/custom2.css')}}">
+    <link rel="stylesheet" href="{{asset('css/errors.css')}}">
 @endsection
 @section('content')
 <div class="content-wrapper">
@@ -18,9 +19,9 @@
         <div class="stunning-header-content">
             <div class="span3 well">
                 @if (session('success'))
-                    <p class="alert">{{session('success')}}</p>
+                    <p class="alert success">{{session('success')}}</p>
                 @endif
-                @if($user->avatar=='')
+                @if(!$user->avatar)
                     <a href="{{asset('img/avatar.webp')}}" class="link-image js-zoom-image">
                         <img src="{{asset('img/avatar.webp')}}" id="avatar" width="30%" height="30%" class="rounded-circle">
                     </a>

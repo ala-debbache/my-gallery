@@ -67,7 +67,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
           <p class="centered">
-            @if(auth()->user()->avatar=='')
+            @if(!auth()->user()->avatar)
               <img src="{{asset('img/avatar.webp')}}" class="img-circle" width="80">
             @else
               <img src="{{asset(auth()->user()->avatar)}}" class="img-circle" width="80">

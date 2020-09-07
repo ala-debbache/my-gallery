@@ -68,26 +68,16 @@ class FrontController extends Controller
             if($user->avatar){
                 // $avatar=$request->avatar->store('users');
                 // Storage::delete($user->avatar);
-                if ($user->avatar) {
-                    unlink($user->avatar);
-                }
-                $image=$request->avatar;
-                $name=time().$image->getClientOriginalName().'.'.$image->getClientOriginalExtension();
-                $destination=public_path('/users-avatars');
-                $image->move($destination,$name);
-                $user->update([
-                    'avatar'=>'users-avatars/'.$name
-                ]);
-            }else{
-                // $avatar=$request->avatar->store('users');
-                $image=$request->avatar;
-                $name=time().$image->getClientOriginalName().'.'.$image->getClientOriginalExtension();
-                $destination=public_path('/users-avatars');
-                $image->move($destination,$name);
-                $user->update([
-                    'avatar'=>'users-avatars/'.$name
-                ]);
+                unlink($user->avatar);
             }
+            // $avatar=$request->avatar->store('users');
+            $image=$request->avatar;
+            $name=time().$image->getClientOriginalName().'.'.$image->getClientOriginalExtension();
+            $destination=public_path('/users-avatars');
+            $image->move($destination,$name);
+            $user->update([
+                'avatar'=>'users-avatars/'.$name
+            ]);
         }
         if($request->name){
             $user->name=$request->name;

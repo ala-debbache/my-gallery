@@ -29,7 +29,7 @@
                 <div class="col-lg-10 col-lg-offset-1">
                     <article class="hentry post post-standard-details">
                         @if (session('success'))
-                            <p class="alert">{{session('success')}}</p>
+                            <p class="alert success">{{session('success')}}</p>
                         @endif
                         <div class="post-thumb">
                             <img src="{{asset($post->image)}}" alt="seo">
@@ -98,7 +98,7 @@
                     <div class="blog-details-author">
 
                         <div class="blog-details-author-thumb">
-                            @if($post->user->avatar=='')
+                            @if(!$post->user->avatar)
                             <img src="{{asset('img/avatar.webp')}}" id="posted_by" alt="Author">
                             @else
                             <img src="{{asset($post->user->avatar)}}" id="posted_by" alt="Author">

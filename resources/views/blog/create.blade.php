@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Styles -->
     <link href="{{ asset('css/custom2.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/inputs.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/inputs.css') }}" rel="stylesheet"> --}}
     <style>
         a{
             text-decoration-line: none;

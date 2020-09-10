@@ -22,9 +22,9 @@ class StartSeeder extends Seeder
             'email'=>'admin@example.com',
             'password'=>Hash::make('password'),
             'isadmin'=>1,
-            'facebook'=>'www.facebook.com',
-            'instagram'=>'www.instagram.com',
-            'twitter'=>'www.twitter.com',
+            'facebook'=>'https://www.facebook.com',
+            'instagram'=>'https://www.instagram.com',
+            'twitter'=>'https://www.twitter.com',
             'about'=>'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.'
         ]);
         $user2=User::create([
@@ -32,9 +32,9 @@ class StartSeeder extends Seeder
             'email'=>'example@example.com',
             'password'=>Hash::make('password'),
             'isadmin'=>0,
-            'facebook'=>'www.facebook.com',
-            'instagram'=>'www.instagram.com',
-            'twitter'=>'www.twitter.com',
+            'facebook'=>'https://www.facebook.com',
+            'instagram'=>'https://www.instagram.com',
+            'twitter'=>'https://www.twitter.com',
             'about'=>'The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.'
         ]);
 
